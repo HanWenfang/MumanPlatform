@@ -4,6 +4,7 @@
 #include "handlers/MessageTagHandler.h"
 #include "core/ComputeCore.h"
 #include "communication/MessageTypes.h"
+#include "Ranks/ArgumentsParser.h"
 
 using namespace std;
 
@@ -20,9 +21,11 @@ public:
 
 	}
 
-	void callback()
+	void callback(Message &message)
 	{
 		cout << "ECHO_MESSAGE callback!" << endl;
+		cout << message.getRankSource() << " -> " << message.getRankDestination() << endl;
+		cout << "Got : "  << message.getContext() << endl;
 	}
 };
 
@@ -34,13 +37,17 @@ int main(int argc, char *argv[])
 	ranks.push_back(rank1);
 	ranks.push_back(rank2);
 
-	ComputeCore computerCore(ranks);
+	int rank = ArgumentsParser::getRank(argc, argv);
+
+	ComputeCore computerCore(ranks, rank);
+
 	// message handler
 	echoMessage echoHandler(ECHO_MESSAGE);
 
 	computerCore.registerMessageHandler(echoHandler);
 	
-	cout << "Hello World!" << endl;
+	computerCore.run();
+
 	return 0;
 }
 

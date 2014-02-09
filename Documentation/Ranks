@@ -1,0 +1,20 @@
+
+Rank is the process around the distributed environment.
+
+It has 
+	ID:int
+	IP:Port [communicate with the outside world]
+
+
+
+- You need to set IP:Port Table on your own, the library won't provide it for you. Rank ID is the position of 
+  IP:Port in the IP:Port table.
+
+  Set rank id use command line arguments: program -rank n
+
+
+- Your One program will execute differently with different Rank ID.
+
+
+
+

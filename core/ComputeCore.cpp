@@ -2,15 +2,9 @@
 #include "ComputeCore.h"
 #include "reactor/Reactor.h"
 
-void ComputeCore::ConfigRank()
-{
-
-}
-
 
 void ComputeCore::run()
 {
-	ConfigRank();
 	asyncore.initialize(rank, ranks);
 	Reactor reactor(this);
 
@@ -21,7 +15,13 @@ void ComputeCore::run()
 		{
 			reactor.start(asyncore.acceptSocket()); // reactor
 		}
-		
+
+		// rank
+		if(rank == 1)
+		{
+			
+		}
+
 		//if(errno == EINTR) { continue; }
 	}
 
@@ -32,4 +32,7 @@ void ComputeCore::registerMessageHandler(MessageTagHandler &messageTagHandler)
 	MessageTagHandlerTable[messageTagHandler.message_tag] = &messageTagHandler;
 }
 
-
+MessageTagHandler* ComputeCore::getMessageHandler(int message_tag)
+{
+	return MessageTagHandlerTable[message_tag];
+}

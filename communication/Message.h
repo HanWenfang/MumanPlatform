@@ -23,6 +23,18 @@ public:
 
 	}
 
+	string getContext();
+	void setContext(string &c);
+	int getContextSize();
+	
+	int getRankSource();
+	void setRankSource(int rank);
+	
+	int getRankDestination();
+	void setRankDestination(int rank);
+
+	int getMessageTag();
+	void setMessageTag(int mtag);
 };
 
 

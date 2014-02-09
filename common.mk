@@ -3,7 +3,7 @@ RANLIB  = ranlib
 INCLUDE = -I. -I/usr/local/include
 CPP 	= g++
 LIBRARY = -L. -L/usr/local/lib
-SYSLIBS = -lMumanPlatform
+SYSLIBS = -lMumanPlatform -lPocoFoundation
 
 #core
 obj-x += core/ComputeCore.o
@@ -16,6 +16,7 @@ obj-x += communication/Protocol.o
 
 #ranks
 #obj-x += Ranks/UniqueServer.o
+obj-x += Ranks/ArgumentsParser.o
 
 #reactor
 obj-x += reactor/Reactor.o

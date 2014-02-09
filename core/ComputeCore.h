@@ -16,16 +16,16 @@ class ComputeCore
 private:
 	vector<Message> inbox;
 	vector<Message> outbox;
-	int rank;
 	vector<UniqueServer> ranks;
+	int rank;
 	AsynCore asyncore;
 	map<int, MessageTagHandler*> MessageTagHandlerTable;
 
 public:
-	ComputeCore(vector<UniqueServer> &rank_set):ranks(rank_set){ }
+	ComputeCore(vector<UniqueServer> &rank_set, int rk):ranks(rank_set), rank(rk){ }
 	void run();
-	void ConfigRank();
 	void registerMessageHandler(MessageTagHandler &messageTagHandler);
+	MessageTagHandler* getMessageHandler(int message_tag);
 	int getRank()
 	{
 		return rank;

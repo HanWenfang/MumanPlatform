@@ -6,8 +6,11 @@
 #include <iostream>
 #include "communication/MessageHandler.h"
 #include "core/ComputeCore.h"
+#include "communication/Protocol.h"
 
 class ComputeCore;
+
+using namespace std;
 
 class Reactor
 {
