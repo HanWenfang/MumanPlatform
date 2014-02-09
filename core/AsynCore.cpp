@@ -59,20 +59,25 @@ int AsynCore::initialize(int rk, vector<UniqueServer> &rank_set)
 	setRanks(rk, rank_set);
 
 	if(spawnSocket() < 0){
+		cout << "spawn socket error" << endl;
 		return -1;
 	}
 	if(configSocket(SO_REUSEADDR) < 0){
+		cout << "config socket error" << endl;
 		return -1;
 	}
 
 	struct sockaddr_in ServerAddr;
 	memset(&ServerAddr, 0, sizeof(ServerAddr));
-	socketAddress(ServerAddr, ranks[rank].port, htonl(INADDR_ANY));
+	socketAddress(ServerAddr, htons(ranks[rank].port), htonl(INADDR_ANY));
+	cout << ranks[rank].port << endl;
 
 	if(socketRankBind(&ServerAddr) < 0){
+		cout << "socket bind error" << endl;
 		return -1;
 	}
 	if(setListen(511) < 0){
+		cout << "set socket listen error" << endl;
 		return -1;
 	}
 

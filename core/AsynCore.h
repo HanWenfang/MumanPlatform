@@ -6,6 +6,7 @@
 #include "communication/Message.h"
 #include <vector>
 #include <arpa/inet.h>
+#include <iostream>
 
 using namespace std;
 

@@ -1,7 +1,6 @@
 
 #include "Reactor.h"
 #include "communication/Message.h"
-#include "communication/MessageTypes.h"
 #include <sys/select.h>
 
 int Reactor::start(int sock)
@@ -16,13 +15,6 @@ int Reactor::start(int sock)
 		time_value.tv_sec = 5;
 		time_value.tv_usec = 200;
 
-		// rank
-		if(computeCore->getRank() == 1)
-		{
-			Message message(1, 0, ECHO_MESSAGE, "Hello World");
-			outbox.push_back(message);
-		}
-
 		if (::select(sock+1, &file_descriptors, NULL, NULL, &time_value) > 0)
 		{
 			//receiveMessage
@@ -32,6 +24,7 @@ int Reactor::start(int sock)
 				isAlive = false;;
 			}
 		}
+			cout << "inbox: " << inbox.size() << endl;
 			//processMessage
 			for(vector<Message>::iterator it=inbox.begin(); it != inbox.end(); ++it)
 			{
@@ -39,6 +32,7 @@ int Reactor::start(int sock)
 				computeCore->getMessageHandler(it->getMessageTag())->callback(*it);
 			}
 			//processData
+			if(!inbox.empty())inbox.clear();
 
 			//sendMessage [use timeout to solve communication faulse]
 			Protocol::sendMessage(sock, outbox);

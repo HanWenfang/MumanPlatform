@@ -13,6 +13,7 @@ obj-x += core/AsynCore.o
 obj-x += communication/Message.o
 obj-x += communication/MessageHandler.o
 obj-x += communication/Protocol.o
+obj-x += communication/Connect.o
 
 #ranks
 #obj-x += Ranks/UniqueServer.o

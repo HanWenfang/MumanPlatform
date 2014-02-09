@@ -34,6 +34,11 @@ int Protocol::receiveMessage(int sock, vector<Message> &inbox)
 			line_one = false;
 			line_two = true;
 		}
+		else if(character == ':' && line_two)
+		{
+			message_tag = Poco::NumberParser::parse(message_stream);
+			message_stream.clear();
+		}
 		else if(character == '\n' && line_two)
 		{
 			data_length = Poco::NumberParser::parse(message_stream);
@@ -54,7 +59,6 @@ int Protocol::receiveMessage(int sock, vector<Message> &inbox)
 		++counter;
 		if(counter == data_length) break;
 	}
-
 	if(globalReadCounter == 0) return 0;
 	
 	inbox.push_back(Message(source, destination, message_tag, message_stream));

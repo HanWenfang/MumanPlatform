@@ -3,7 +3,7 @@
 #define PROTOCOL_MUMAN_H
 #include "Message.h"
 #include <vector>
-
+#include <iostream>
 
 /******************
  stream format:

@@ -1,12 +1,18 @@
 
 #include "ComputeCore.h"
 #include "reactor/Reactor.h"
-
+#include "communication/Connect.h"
+#include "communication/Protocol.h"
+#include "communication/Message.h"
+#include "communication/MessageTypes.h"
+#include <errno.h>
+#include <string.h>
 
 void ComputeCore::run()
 {
 	asyncore.initialize(rank, ranks);
 	Reactor reactor(this);
+	int flag = true;
 
 	for(;;)
 	{
@@ -16,10 +22,24 @@ void ComputeCore::run()
 			reactor.start(asyncore.acceptSocket()); // reactor
 		}
 
+		cout << "rank: " << rank <<endl;
 		// rank
-		if(rank == 1)
+		if(rank == 1 && flag)
 		{
-			
+			cout << "send message..." << endl;
+			int sock;
+			if ( Connect::connect(ranks[0].ip, ranks[0].port, sock) < 0)
+			{
+				cout << "connect " << ranks[0].ip << ":" << ranks[0].port << " error" << endl;
+				cout << strerror(errno) << endl;
+			}
+			Message message(1, 0, ECHO_MESSAGE, "Hello World");
+			outbox.push_back(message);
+			Protocol::sendMessage(sock, outbox);
+			sleep(3);
+			close(sock);
+
+			flag = false;
 		}
 
 		//if(errno == EINTR) { continue; }
