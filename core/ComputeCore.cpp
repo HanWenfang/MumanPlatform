@@ -10,13 +10,17 @@
 
 void ComputeCore::run()
 {
-	asyncore.initialize(rank, ranks);
+	if (asyncore.initialize(rank, ranks) < 0)
+	{
+		cout << "initialize asyncore error." << endl;
+		return;
+	}
+
 	Reactor reactor(this);
 	int flag = true;
 
 	for(;;)
 	{
-		
 		if(asyncore.select() > 0)
 		{
 			reactor.start(asyncore.acceptSocket()); // reactor

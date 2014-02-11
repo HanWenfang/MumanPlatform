@@ -21,22 +21,21 @@ int Reactor::start(int sock)
 			if ( Protocol::receiveMessage(sock, inbox) == 0)
 			{
 				close(sock);
-				isAlive = false;;
+				isAlive = false;
 			}
 		}
 			cout << "inbox: " << inbox.size() << endl;
-			//processMessage
+			//processData
 			for(vector<Message>::iterator it=inbox.begin(); it != inbox.end(); ++it)
 			{
 				cout << "Rank: " << computeCore->getRank() << endl;
 				computeCore->getMessageHandler(it->getMessageTag())->callback(*it);
 			}
-			//processData
-			if(!inbox.empty())inbox.clear();
+			//processMessage
+			if(!inbox.empty()) inbox.clear();
 
 			//sendMessage [use timeout to solve communication faulse]
-			Protocol::sendMessage(sock, outbox);
-
+			if(!outbox.empty()) Protocol::sendMessage(sock, outbox);
 	}
 
 	return 0;

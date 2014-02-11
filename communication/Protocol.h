@@ -25,9 +25,8 @@ private:
 
 public:
 	static int receiveMessage(int sock, vector<Message> &inbox);
-	static int sendMessage(int sock, vector<Message> &outbox);
+	static void sendMessage(int sock, vector<Message> &outbox);
 	static string messageToStream(Message &message);
-
 
 };
 

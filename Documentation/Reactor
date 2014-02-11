@@ -1,0 +1,21 @@
+
+Pattern 1:
+	
+	Blocking socket:
+
+		[Asynchronous] One connection One reactor one thread. --use timeout to solve failure-
+
+		[Synchronous] Many connections One reactor only one thread.
+
+		[Half-Asynchronous ] Many connections One reactor one thread.[ thread pool - round robin ]
+
+	Non-blocking socket:
+		[Asynchronous] One connection One reactor one thread. --use timeout to solve failure-
+
+		[Synchronous] Many connections One reactor only one thread.
+
+		[Half-Asynchronous ] Many connections One reactor one thread.[ thread pool - round robin ]
+
+
+
+

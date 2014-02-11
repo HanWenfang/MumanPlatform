@@ -70,7 +70,6 @@ int AsynCore::initialize(int rk, vector<UniqueServer> &rank_set)
 	struct sockaddr_in ServerAddr;
 	memset(&ServerAddr, 0, sizeof(ServerAddr));
 	socketAddress(ServerAddr, htons(ranks[rank].port), htonl(INADDR_ANY));
-	cout << ranks[rank].port << endl;
 
 	if(socketRankBind(&ServerAddr) < 0){
 		cout << "socket bind error" << endl;

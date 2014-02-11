@@ -1,0 +1,8 @@
+
+receiveMessage() and sendMessage():
+	deal with blocked socket, and will return until deal with all the data.
+
+
+
+
+

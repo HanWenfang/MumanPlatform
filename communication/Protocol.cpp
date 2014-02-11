@@ -19,8 +19,16 @@ int Protocol::receiveMessage(int sock, vector<Message> &inbox)
 	bool line_one = true;
 	bool line_two = false;
 
-	while(read(sock,&character, 1) == 1)
+	while(true)
 	{
+		if(read(sock,&character, 1) != 1)
+		{
+			if(errno == EINTR) continue;
+			else
+				break;
+		}
+		
+
 		++globalReadCounter;
 		if(character == ':' && line_one)
 		{
@@ -52,21 +60,31 @@ int Protocol::receiveMessage(int sock, vector<Message> &inbox)
 		}
 	}
 
-	while(read(sock,&character, 1) == 1)
+	while(true)
 	{
+		if(read(sock,&character, 1) != 1)
+		{
+			if(errno == EINTR) continue;
+			else break;
+		}
+		
 		++globalReadCounter;
 		message_stream.push_back(character);
 		++counter;
 		if(counter == data_length) break;
 	}
-	if(globalReadCounter == 0) return 0;
 	
+	if(globalReadCounter == 0) return 0;
+
+	//receive error [ break condition ] checksum?
+	if(source==-1 || destination==-1 || message_tag==-1 || data_length != message_stream.size()) return -1;
+
 	inbox.push_back(Message(source, destination, message_tag, message_stream));
 
-	return 1;
+	return 1; // got one Message
 }
 
-int Protocol::sendMessage(int sock, vector<Message> &outbox)
+void Protocol::sendMessage(int sock, vector<Message> &outbox)
 {
 	string stream;
 	int left;
@@ -79,12 +97,18 @@ int Protocol::sendMessage(int sock, vector<Message> &outbox)
 		left = stream.size(); 
 		char const *temp = stream.c_str();
 
-		while(left>0 && (written = write(sock, temp, left)) > 0)
+		while(left>0)
 		{
+			if((written = write(sock, temp, left)) <= 0)
+			{
+				if(errno == EINTR) continue;
+				else break;
+			}
+
 			left -= written;
 			temp += written;
 		}
-
+		// send error [ break condition ]
 		if(left != 0)
 		{
 			exchange.push_back(*it);
@@ -92,7 +116,6 @@ int Protocol::sendMessage(int sock, vector<Message> &outbox)
 	}
 
 	outbox = exchange; // fault-tolerance
-	return 0;
 }
 
 string Protocol::messageToStream(Message &message)

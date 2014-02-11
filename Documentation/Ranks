@@ -16,5 +16,12 @@ It has
 - Your One program will execute differently with different Rank ID.
 
 
-
+Rank Table example:
+	+------------------+
+	|  ip:port[rank1]  |
+	+------------------+
+	|         [rank2]  |
+	+------------------+
+	|         [rank3]  |
+	+------------------+
 
