@@ -1,0 +1,14 @@
+
+Descriptors Management Algorithm
+
+Latest Service Algorithm
+	The latest socket will be pushed in the front of descriptors' list. And the long-time connection will be 
+ pushed in the back of the list as time flows.
+
+
+
+
+
+
+
+

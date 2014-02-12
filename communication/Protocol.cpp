@@ -4,6 +4,7 @@
 #include <string>
 #include <Poco/NumberParser.h>
 #include <Poco/NumberFormatter.h>
+#include <errno.h>
 
 int Protocol::receiveMessage(int sock, vector<Message> &inbox)
 {
@@ -28,7 +29,6 @@ int Protocol::receiveMessage(int sock, vector<Message> &inbox)
 				break;
 		}
 		
-
 		++globalReadCounter;
 		if(character == ':' && line_one)
 		{
@@ -77,7 +77,7 @@ int Protocol::receiveMessage(int sock, vector<Message> &inbox)
 	if(globalReadCounter == 0) return 0;
 
 	//receive error [ break condition ] checksum?
-	if(source==-1 || destination==-1 || message_tag==-1 || data_length != message_stream.size()) return -1;
+	if( data_length != message_stream.size() || source==-1 || destination==-1 || message_tag==-1 ) return -1;
 
 	inbox.push_back(Message(source, destination, message_tag, message_stream));
 

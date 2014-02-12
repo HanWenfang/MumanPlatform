@@ -23,11 +23,11 @@ void ComputeCore::run()
 	{
 		if(asyncore.select() > 0)
 		{
-			reactor.start(asyncore.acceptSocket()); // reactor
+			reactor.start(asyncore.acceptSocket()); // reactor--must be asynchronous
 		}
 
 		cout << "rank: " << rank <<endl;
-		// rank
+		// rank1-client: fail tolerance [ server failure ]
 		if(rank == 1 && flag)
 		{
 			cout << "send message..." << endl;
@@ -45,8 +45,6 @@ void ComputeCore::run()
 
 			flag = false;
 		}
-
-		//if(errno == EINTR) { continue; }
 	}
 
 }

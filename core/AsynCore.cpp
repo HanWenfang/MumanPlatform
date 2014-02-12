@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <sys/select.h>
 #include <string.h>
+#include <errno.h>
 
 #define IP_PORT_SIZE sizeof(struct sockaddr_in)
 
@@ -43,7 +44,15 @@ int AsynCore::acceptSocket()
 	struct sockaddr_in temp;
 	socklen_t add_size = IP_PORT_SIZE;
 
-	return_value = accept(current_socket, (struct sockaddr *)&temp, &add_size);
+	for(;;)
+	{
+		if((return_value = accept(current_socket, (struct sockaddr *)&temp, &add_size)) < 0)
+		{
+			if(errno == EINTR) continue;
+			else break;
+		}
+		else break;
+	}
 
 	return return_value;
 }

@@ -7,9 +7,11 @@ Pattern 1:
 
 		[Synchronous] Many connections One reactor only one thread.
 
-		[Half-Asynchronous ] Many connections One reactor one thread.[ thread pool - round robin ]
+		[Half-Asynchronous] Many connections One reactor one thread.
+										[ thread pool - round robin [client deals with it] ]
 
 	Non-blocking socket:
+
 		[Asynchronous] One connection One reactor one thread. --use timeout to solve failure-
 
 		[Synchronous] Many connections One reactor only one thread.
@@ -17,5 +19,9 @@ Pattern 1:
 		[Half-Asynchronous ] Many connections One reactor one thread.[ thread pool - round robin ]
 
 
+thread pool -- no signal SIGCHLD [ EINTR ]
 
+
+TReactor:
+	If Descriptors' Set is empty , the TReactor turns into an timer!
 

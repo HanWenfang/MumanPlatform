@@ -5,6 +5,8 @@
 
 int Reactor::start(int sock)
 {
+	if(sock < 0) return -1;
+
 	fd_set file_descriptors;
 	struct timeval time_value;
 

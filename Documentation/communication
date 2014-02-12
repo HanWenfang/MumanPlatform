@@ -1,0 +1,28 @@
+Communication Pattern
+
+1. get [ client->server ] Client is easier to handle.
+2. push [ server->client ] Server needs to make sure the data has been sent exactly.
+
+Brain Pattern
+1. Actively get input [ sense ]
+2. Locally compute [ queue , lock...]
+3. Push result messages to actor
+4. Actively get result [ check result ]
+
+
+
+Normally "get" is better than push.
+
+"Get" pattern is easier to retry if communication fails. 
+
+communication protocol:
+	get  ->  [ wait response ]
+	send ->  
+	get  ->  [ Check the  message ] [ if error ] [ retry ]
+
+
+
+
+
+
+

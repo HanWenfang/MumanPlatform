@@ -21,6 +21,16 @@ obj-x += Ranks/ArgumentsParser.o
 
 #reactor
 obj-x += reactor/Reactor.o
+obj-x += reactor/TReactor.o
+
+#proactor
+obj-x += proactor/Proactor.o
+
+#routers
+obj-x += routers/Point.o
+
+#thread
+obj-x += thread/ThreadManager.o
 
 #test
 obj-HelloWorld += test/HelloWorld.o
