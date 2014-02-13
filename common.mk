@@ -17,8 +17,8 @@ obj-x += communication/Connect.o
 obj-x += communication/VirtualCommunicator.o
 
 #ranks
-#obj-x += Ranks/UniqueServer.o
-obj-x += Ranks/ArgumentsParser.o
+#obj-x += ranks/UniqueServer.o
+obj-x += ranks/ArgumentsParser.o
 
 #reactor
 obj-x += reactor/Reactor.o

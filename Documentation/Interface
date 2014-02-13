@@ -1,0 +1,13 @@
+
+
+ComputeCore :
+	map<int, MessageTagHandler*> MessageTagHandlerTable  : Callbacks for different messages.
+	map<int, RankHandler*> RankHandlerTable;             : Callbacks for different Ranks.
+
+
+How to run program:
+	program -rank n
+
+
+
+

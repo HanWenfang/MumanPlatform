@@ -1,12 +1,6 @@
 
 #include "ComputeCore.h"
 #include "reactor/Reactor.h"
-#include "communication/Connect.h"
-#include "communication/Protocol.h"
-#include "communication/Message.h"
-#include "communication/MessageTypes.h"
-#include <errno.h>
-#include <string.h>
 
 void ComputeCore::run()
 {
@@ -17,7 +11,6 @@ void ComputeCore::run()
 	}
 
 	Reactor reactor(this);
-	int flag = true;
 
 	for(;;)
 	{
@@ -27,26 +20,16 @@ void ComputeCore::run()
 		}
 
 		cout << "rank: " << rank <<endl;
+		
 		// rank1-client: fail tolerance [ server failure ]
-		if(rank == 1 && flag)
+		for(map<int, RankHandler*>::iterator it=RankHandlerTable.begin(); it != RankHandlerTable.end(); ++it)
 		{
-			cout << "send message..." << endl;
-			int sock;
-			if ( Connect::connect(ranks[0].ip, ranks[0].port, sock) < 0)
+			if(it->second->running_flag && it->second->rank == rank)
 			{
-				cout << "connect " << ranks[0].ip << ":" << ranks[0].port << " error" << endl;
-				cout << strerror(errno) << endl;
+				it->second->callback();
 			}
-			Message message(1, 0, ECHO_MESSAGE, "Hello World");
-			outbox.push_back(message);
-			Protocol::sendMessage(sock, outbox);
-			sleep(3);
-			close(sock);
-
-			flag = false;
 		}
 	}
-
 }
 
 void ComputeCore::registerMessageHandler(MessageTagHandler &messageTagHandler)
@@ -54,7 +37,18 @@ void ComputeCore::registerMessageHandler(MessageTagHandler &messageTagHandler)
 	MessageTagHandlerTable[messageTagHandler.message_tag] = &messageTagHandler;
 }
 
+void ComputeCore::registerRankHandler(RankHandler &rankHandler)
+{
+	RankHandlerTable[rankHandler.rank] = &rankHandler;
+}
+
 MessageTagHandler* ComputeCore::getMessageHandler(int message_tag)
 {
 	return MessageTagHandlerTable[message_tag];
 }
+
+RankHandler* ComputeCore::getRankHandler(int rank)
+{
+	return RankHandlerTable[rank];
+}
+

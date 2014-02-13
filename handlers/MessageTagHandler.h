@@ -11,7 +11,7 @@ public:
 	MessageTagHandler(int mType):message_tag(mType) {}
 
 	int message_tag;
-	virtual void callback(Message &message) {}
+	virtual int callback(Message &message) { return 0;}
 
 };
 
