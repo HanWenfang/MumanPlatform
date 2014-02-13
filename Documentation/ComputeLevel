@@ -1,0 +1,20 @@
+
+Computer Level is divided by : 
+		different message 
+		communication pattern 
+		Reactor Pattern
+		Computation Pattern
+		...
+
+// select timeout
+Rank [ When rank process own has tasks , it will refuse other "get request". ]
+
+// select timeout
+Thread [ reactor ]
+
+
+// Time-Driven
+
+
+
+

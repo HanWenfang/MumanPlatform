@@ -46,3 +46,14 @@ void Message::setMessageTag(int mtag)
 	message_tag = mtag;
 }
 
+void Message::setSocket(int sock)
+{
+	socket = sock;
+}
+
+int Message::getSocket()
+{
+	return socket;
+}
+
+

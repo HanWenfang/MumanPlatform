@@ -1,0 +1,18 @@
+
+We designed different strategies with different Messages.
+
+Message:
+
+rank    : for different processes
+blockID : for virtual communicator
+message tag : for different message handlers
+
+
+
+
+
+
+
+
+
+

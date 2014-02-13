@@ -13,6 +13,8 @@ private:
 	int rank_destination;
 	
 	int message_tag;
+	int blockID;
+	int socket;
 
 	string context; // stream protocol
 
@@ -20,7 +22,7 @@ public:
 	Message(int rank_src, int rank_des, int message_t, string cont)\
 	:rank_source(rank_src), rank_destination(rank_des), message_tag(message_t), context(cont)
 	{
-
+		
 	}
 
 	string getContext();
@@ -35,6 +37,9 @@ public:
 
 	int getMessageTag();
 	void setMessageTag(int mtag);
+
+	void setSocket(int sock);
+	int getSocket();
 };
 
 

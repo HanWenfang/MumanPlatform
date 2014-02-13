@@ -58,9 +58,11 @@ int TReactor::start()
 
 	list<int> descriptorSet;
 	int maxSock;
+	int receiveResult;
 
 	while(isAlive)
 	{
+		// Timer or IO multiplex
 		if(copyDescriptorSet(descriptorSet) == 0) file_descriptors_ptr = NULL;
 		else file_descriptors_ptr = &file_descriptors;
 
@@ -81,14 +83,21 @@ int TReactor::start()
 			//receiveMessage
 			for(list<int>::iterator it=descriptorSet.begin(); it != descriptorSet.end(); ++it)
 			{
-				if(FD_ISSET(*it, file_descriptors))
+				if(FD_ISSET(*it, file_descriptors_ptr))
 				{
-					if ( Protocol::receiveMessage(sock, inbox) == 0)
+					
+					receiveResult = Protocol::receiveMessage(*it, inbox);
+
+					if ( receiveResult == 0)
 					{
-						close(sock);
-						removeDescriptor(sock);
+						close(*it);
+						removeDescriptor(*it);
 					}
 
+					if( receiveResult < 0)
+					{
+						// communication false operation, maybe a error message queue
+					}
 				}
 			}
 		}
@@ -103,13 +112,14 @@ int TReactor::start()
 			if(!inbox.empty()) inbox.clear();
 
 			//sendMessage [use timeout to solve communication faulse]
-			if(!outbox.empty()) Protocol::sendMessage(sock, outbox); // ??????????
+			if(!outbox.empty()) Protocol::sendMessage(outbox);
 	}
 
 	return 0;
 }
 
-void run()
+void TReactor::run()
 {
 	start();
 }
+

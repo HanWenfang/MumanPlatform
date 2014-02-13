@@ -79,7 +79,10 @@ int Protocol::receiveMessage(int sock, vector<Message> &inbox)
 	//receive error [ break condition ] checksum?
 	if( data_length != message_stream.size() || source==-1 || destination==-1 || message_tag==-1 ) return -1;
 
-	inbox.push_back(Message(source, destination, message_tag, message_stream));
+	Message message(source, destination, message_tag, message_stream);
+	message.setSocket(sock);
+
+	inbox.push_back(message);
 
 	return 1; // got one Message
 }
@@ -133,5 +136,40 @@ string Protocol::messageToStream(Message &message)
 
 	return stream;
 }
+
+void Protocol::sendMessage(vector<Message> &outbox)
+{
+	string stream;
+	int left;
+	int written;
+	vector<Message> exchange;
+
+	for(vector<Message>::iterator it=outbox.begin(); it != outbox.end(); ++it)
+	{
+		stream = messageToStream(*it);
+		left = stream.size(); 
+		char const *temp = stream.c_str();
+
+		while(left>0)
+		{
+			if((written = write(it->getSocket(), temp, left)) <= 0)
+			{
+				if(errno == EINTR) continue;
+				else break;
+			}
+
+			left -= written;
+			temp += written;
+		}
+		// send error [ break condition ]
+		if(left != 0)
+		{
+			exchange.push_back(*it);
+		}
+	}
+
+	outbox = exchange; // fault-tolerance
+}
+
 
 

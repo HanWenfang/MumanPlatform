@@ -10,7 +10,7 @@ using namespace std;
 class ThreadManager
 {
 private:
-	vector<Thread> threads;
+	vector<Poco::Thread> threads;
 
 public:
 

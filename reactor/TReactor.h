@@ -35,7 +35,7 @@ public:
 	}
 
 	//atomic operation
-	void addDescriptor(int sock);
+	int addDescriptor(int sock);
 	void removeDescriptor(int sock);
 	unsigned int copyDescriptorSet(list<int> &dset);
 	int max(list<int> &dset);
