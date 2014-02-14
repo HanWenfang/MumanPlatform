@@ -25,3 +25,7 @@ thread pool -- no signal SIGCHLD [ EINTR ]
 TReactor:
 	If Descriptors' Set is empty , the TReactor turns into an timer!
 
+
+
+
+

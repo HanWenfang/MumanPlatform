@@ -1,0 +1,25 @@
+Blocking IO :
+	+timeout:
+		SO_RCVTIMEO
+		SO_SNDTIMEO
+			read/write
+
+Non-blocking IO :
+	+timeout:
+		connect [ SELECT_WRITE ] blocking -> unblocking -> blocking
+
+IO multiplex/Timeout:
+	select/poll
+
+Asynchronous IO:
+	aio_  [ ]
+
+
+
+
+
+
+
+
+
+
