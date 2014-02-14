@@ -77,9 +77,13 @@ int main(int argc, char *argv[])
 	ranks.push_back(rank1);
 	ranks.push_back(rank2);
 
-	int rank = ArgumentsParser::getRank(argc, argv);
+	int rank = -1;
+	int master_mode = -1;
+	int slave_mode = -1;
 
-	ComputeCore computerCore(ranks, rank);
+	ArgumentsParser::parse(argc, argv, &rank, &master_mode, &slave_mode);
+
+	ComputeCore computerCore(ranks, rank, master_mode, slave_mode);
 	cout << ranks[0].ip << ":" << ranks[0].port << endl;
 	
 	// message handler

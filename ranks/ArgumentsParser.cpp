@@ -13,6 +13,19 @@ int ArgumentsParser::getRank(int argc, char *argv[])
 	return -1;
 }
 
+int ArgumentsParser::parse(int argc, char *argv[], int *rank, int *master_mode, int *slave_mode)
+{
+	for(int i=1; i<argc; i+=2)
+	{
+		if(strcmp(argv[i], "-rank") == 0) *rank = Poco::NumberParser::parse(argv[i+1]);
+		if(strcmp(argv[i], "-master") == 0) *master_mode = Poco::NumberParser::parse(argv[i+1]);
+		if(strcmp(argv[i], "-slave") == 0) *slave_mode = Poco::NumberParser::parse(argv[i+1]);
+	}
+
+	return 0;
+}
+
+
 
 
 
