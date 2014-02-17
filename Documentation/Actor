@@ -1,0 +1,39 @@
+Book: Actors : A model of concurrent computation in distributed system
+
+Distributed Computing
+
+computation:
+	Turing Machine/Lambda Theory
+	
+	virtualprocessor:
+	[ commonly ]scheduler [ os -> processor]
+
+	virtualtimer:
+	 sequence & parellel ==> for-loop ? while?
+
+
+1. Buffered Asynchronouse Commnication.
+2. A realistic model must assume that the arrival order of communication sent is both arbitrary and
+   entirely unknown
+3. The guarantee of delivery
+
+A static topology: has servere limitations in representing the behavior of real system. [ dynamicly extendable ]
+
+
+Paper: viewing control structures as patterns of passing messages
+
+Actors know relations.
+
+[ actor1 ] -friends- [ actor2 ] ... 
+
+Actor is the basic construct of our computation model.
+
+An actor is defined by its behavior, not bu its physical representation!
+
+Message-driven!!
+
+
+
+
+
+

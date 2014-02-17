@@ -36,6 +36,9 @@ obj-x += thread/ThreadManager.o
 #database
 obj-x += database/LinkDB.o
 
+#actors
+obj-x += actors/Actor.o
+
 #test
 obj-HelloWorld += test/HelloWorld.o
 

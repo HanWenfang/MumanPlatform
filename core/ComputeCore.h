@@ -29,6 +29,7 @@ public:
 	ComputeCore(vector<UniqueServer> &rank_set, int rk, int master_mode, int slave_mode)\
 	:ranks(rank_set), rank(rk), master(master_mode), slave(slave_mode){ }
 	void run();
+	
 	void registerMessageHandler(MessageTagHandler &messageTagHandler);
 	MessageTagHandler* getMessageHandler(int message_tag);
 
