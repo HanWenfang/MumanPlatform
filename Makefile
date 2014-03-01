@@ -14,6 +14,9 @@ test/HelloWorld: $(obj-HelloWorld)
 %.o: %.cpp
 	$(CPP) -Wall $(INCLUDE) -c $< -o $@
 
+%.o: %.c
+	$(CXX) -Wall $(INCLUDE) -c $< -o $@
+
 
 clean:
 	rm -rf libMumanPlatform.a $(obj-x) $(obj-HelloWorld) test/HelloWorld

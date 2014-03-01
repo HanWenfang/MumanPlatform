@@ -22,7 +22,10 @@ communication protocol:
 
 
 
-
-
-
-
+O(logn) Broadcast/Gather Algorithm
+		1
+  	   /  \
+ 	  2    3
+     / \   / \
+    4   5 6   7
+....

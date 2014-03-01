@@ -2,6 +2,7 @@ STLIB 	= ar -cr
 RANLIB  = ranlib
 INCLUDE = -I. -I/usr/local/include
 CPP 	= g++
+CXX		= gcc
 LIBRARY = -L. -L/usr/local/lib
 SYSLIBS = -lMumanPlatform -lPocoFoundation
 
@@ -35,6 +36,8 @@ obj-x += thread/ThreadManager.o
 
 #database
 obj-x += database/LinkDB.o
+obj-x += database/JSONParser.o
+obj-x += database/cJSON.o
 
 #actors
 obj-x += actors/Actor.o

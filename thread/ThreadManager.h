@@ -12,12 +12,12 @@ using namespace std;
 class ThreadManager
 {
 private:
-	list<Poco::Thread> threads;
+	list<Poco::Thread *> threads;
 	Poco::Mutex mutex;
 
 public:
-	void eraseThread(list<Poco::Thread>::iterator &it);
-	void pushBackThread(Poco::Thread &thread);
+	void eraseThread(list<Poco::Thread *>::iterator &it);
+	void pushBackThread(Poco::Thread *thread);
 	void tryWait();
 };
 
