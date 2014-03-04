@@ -10,7 +10,7 @@ It has
 - You need to set IP:Port Table on your own, the library won't provide it for you. Rank ID is the position of 
   IP:Port in the IP:Port table.
 
-  Set rank id use command line arguments: program -rank n
+  Set rank id use command line arguments: program -rank n [ -master -slave]
 
 
 - Your One program will execute differently with different Rank ID.

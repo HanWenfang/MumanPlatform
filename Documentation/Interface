@@ -6,7 +6,7 @@ ComputeCore :
 
 
 How to run program:
-	program -rank n
+	program -rank n [ -master -slave]
 
 
 

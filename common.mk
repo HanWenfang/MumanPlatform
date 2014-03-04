@@ -4,7 +4,7 @@ INCLUDE = -I. -I/usr/local/include
 CPP 	= g++
 CXX		= gcc
 LIBRARY = -L. -L/usr/local/lib
-SYSLIBS = -lMumanPlatform -lPocoFoundation
+SYSLIBS = -lMumanPlatform -lPocoFoundation -lm
 
 #core
 obj-x += core/ComputeCore.o
@@ -36,8 +36,7 @@ obj-x += thread/ThreadManager.o
 
 #database
 obj-x += database/LinkDB.o
-obj-x += database/JSONParser.o
-obj-x += database/cJSON.o
+obj-x += database/JSONNode.o
 
 #actors
 obj-x += actors/Actor.o
@@ -45,3 +44,6 @@ obj-x += actors/Actor.o
 #test
 obj-HelloWorld += test/HelloWorld.o
 
+#worker
+obj-MessageSystem += worker/MessageSystem.o
+obj-MessageSystem += worker/Online.o
