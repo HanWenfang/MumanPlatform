@@ -101,18 +101,18 @@ int TReactor::start()
 				}
 			}
 		}
-			cout << "inbox: " << inbox.size() << endl;
-			//processData
-			for(vector<Message>::iterator it=inbox.begin(); it != inbox.end(); ++it)
-			{
-				cout << "Rank: " << computeCore->getRank() << endl;
-				computeCore->getMessageHandler(it->getMessageTag())->callback(*it);
-			}
-			//processMessage
-			if(!inbox.empty()) inbox.clear();
+		cout << "inbox: " << inbox.size() << endl;
+		//processData
+		for(vector<Message>::iterator it=inbox.begin(); it != inbox.end(); ++it)
+		{
+			cout << "Rank: " << computeCore->getRank() << endl;
+			computeCore->getMessageHandler(it->getMessageTag())->callback(*it);
+		}
+		//processMessage
+		if(!inbox.empty()) inbox.clear();
 
-			//sendMessage [use timeout to solve communication faulse]
-			if(!outbox.empty()) Protocol::sendMessage(outbox);
+		//sendMessage [use timeout to solve communication faulse]
+		if(!outbox.empty()) Protocol::sendMessage(outbox);
 	}
 
 	return 0;

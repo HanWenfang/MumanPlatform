@@ -3,6 +3,12 @@ receiveMessage() and sendMessage():
 	deal with blocked socket, and will return until deal with all the data.
 
 
+read 
+	= 0: end of file / closed socket
+	> 0: ok
+	< 0: error
 
-
-
+write:
+	= 0: general error happens!
+	> 0:
+	< 0:

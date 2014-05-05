@@ -2,7 +2,9 @@
 #ifndef RANKHANDLER_MUMAN_H
 #define RANKHANDLER_MUMAN_H
 #include "ranks/UniqueServer.h"
+#include <vector>
 
+using namespace std;
 
 class RankHandler
 {

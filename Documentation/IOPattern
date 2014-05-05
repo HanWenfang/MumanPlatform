@@ -3,6 +3,8 @@ Blocking IO :
 		SO_RCVTIMEO
 		SO_SNDTIMEO
 			read/write
+			recv/send
+	error: ETIMEDOUT
 
 Non-blocking IO :
 	+timeout:

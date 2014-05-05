@@ -96,6 +96,8 @@ int AsynCore::select()
 {
 	FD_ZERO(&file_descriptors);
 	FD_SET(current_socket, &file_descriptors);
+
+	//timeout every 2 seconds
 	time_value.tv_sec = 2;
 	time_value.tv_usec = 200;
 

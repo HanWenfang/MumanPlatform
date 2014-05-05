@@ -28,13 +28,13 @@ public:
 
 	}
 
-	int callback(Message &message)
+	Message callback(Message &message)
 	{
 		cout << "ECHO_MESSAGE callback!" << endl;
 		cout << message.getRankSource() << " -> " << message.getRankDestination() << endl;
 		cout << "Got : "  << message.getContext() << endl;
 
-		return 0;
+		return Message(0, 1, BLANK_MESSAGE, "");
 	}
 };
 
@@ -71,11 +71,11 @@ public:
 
 int main(int argc, char *argv[])
 {
-	UniqueServer rank1("127.0.0.1", 17501);
-	UniqueServer rank2("127.0.0.1", 16502);
+	UniqueServer rank0("127.0.0.1", 17501);
+	UniqueServer rank1("127.0.0.1", 16502);
 	vector<UniqueServer> ranks;
+	ranks.push_back(rank0);
 	ranks.push_back(rank1);
-	ranks.push_back(rank2);
 
 	int rank = -1;
 	int master_mode = -1;

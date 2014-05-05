@@ -4,6 +4,15 @@
 
 void ComputeCore::run()
 {
+	// rank initial operation
+	for(map<int, RankHandler*>::iterator it=RankHandlerTable.begin(); it != RankHandlerTable.end(); ++it)
+	{
+		if(it->second->running_flag && it->second->rank == rank)
+		{
+			it->second->callback();
+		}
+	}
+
 	if (asyncore.initialize(rank, ranks) < 0)
 	{
 		cout << "initialize asyncore error." << endl;
@@ -20,15 +29,6 @@ void ComputeCore::run()
 		}
 
 		cout << "rank: " << rank <<endl;
-		
-		// rank1-client: fail tolerance [ server failure ]
-		for(map<int, RankHandler*>::iterator it=RankHandlerTable.begin(); it != RankHandlerTable.end(); ++it)
-		{
-			if(it->second->running_flag && it->second->rank == rank)
-			{
-				it->second->callback();
-			}
-		}
 	}
 }
 

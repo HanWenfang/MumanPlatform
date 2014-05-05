@@ -3,7 +3,7 @@
 #include <Poco/NumberParser.h>
 #include <string.h>
 
-int ArgumentsParser::getRank(int argc, char *argv[])
+int ArgumentsParser::getRank(int argc, char const *argv[])
 {
 	for(int i=1; i<argc; i+=2)
 	{
@@ -13,7 +13,7 @@ int ArgumentsParser::getRank(int argc, char *argv[])
 	return -1;
 }
 
-int ArgumentsParser::parse(int argc, char *argv[], int *rank, int *master_mode, int *slave_mode)
+int ArgumentsParser::parse(int argc, char const *argv[], int *rank, int *master_mode, int *slave_mode)
 {
 	for(int i=1; i<argc; i+=2)
 	{

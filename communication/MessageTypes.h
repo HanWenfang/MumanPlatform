@@ -6,5 +6,6 @@
 
 
 
-//#define ECHO_MESSAGE 255
+#define ECHO_MESSAGE 65534
+#define BLANK_MESSAGE 65535
 

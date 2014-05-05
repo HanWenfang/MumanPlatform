@@ -15,8 +15,8 @@ using namespace std;
 class ComputeCore
 {
 private:
-	vector<Message> inbox;
-	vector<Message> outbox;
+	//vector<Message> inbox;
+	//vector<Message> outbox;
 	vector<UniqueServer> ranks;
 	int rank;
 	int master;

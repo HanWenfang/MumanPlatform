@@ -44,6 +44,20 @@ obj-x += actors/Actor.o
 #test
 obj-HelloWorld += test/HelloWorld.o
 
-#worker
+
+
+####worker
 obj-MessageSystem += worker/MessageSystem.o
 obj-MessageSystem += worker/Online.o
+
+####main-cgi
+obj-main-get += main-cgi/ServerFront.o
+obj-main-get += main-cgi/Filter.o
+obj-main-get += main-cgi/main-get.o
+
+obj-main-post += main-cgi/ServerFront.o
+obj-main-post += main-cgi/Filter.o
+obj-main-post += main-cgi/main-post.o
+
+
+

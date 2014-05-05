@@ -60,7 +60,9 @@ int Protocol::receiveMessage(int sock, vector<Message> &inbox)
 		}
 	}
 
-	while(true)
+	// context is not zero
+	// bug!!!!!
+	while(data_length > 0)
 	{
 		if(read(sock,&character, 1) != 1)
 		{
@@ -96,6 +98,12 @@ void Protocol::sendMessage(int sock, vector<Message> &outbox)
 
 	for(vector<Message>::iterator it = outbox.begin(); it != outbox.end(); ++it)
 	{
+		// ignore the blank message
+		if(it->getMessageTag() == BLANK_MESSAGE)
+		{
+			continue;
+		}
+
 		stream = messageToStream(*it);
 		left = stream.size(); 
 		char const *temp = stream.c_str();
@@ -111,6 +119,7 @@ void Protocol::sendMessage(int sock, vector<Message> &outbox)
 			left -= written;
 			temp += written;
 		}
+
 		// send error [ break condition ]
 		if(left != 0)
 		{

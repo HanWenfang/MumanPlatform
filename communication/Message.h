@@ -25,6 +25,11 @@ public:
 		
 	}
 
+	Message():rank_source(-1),rank_destination(-1),message_tag(-1),context("")
+	{
+
+	}
+
 	string getContext();
 	void setContext(string &c);
 	int getContextSize();

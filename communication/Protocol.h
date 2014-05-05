@@ -2,6 +2,7 @@
 #ifndef PROTOCOL_MUMAN_H
 #define PROTOCOL_MUMAN_H
 #include "Message.h"
+#include "MessageTypes.h"
 #include <vector>
 #include <iostream>
 
